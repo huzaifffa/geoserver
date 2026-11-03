@@ -1,0 +1,9 @@
+# Local testing only (Dokploy ignores this file):
+#   docker compose -f docker-compose.yml -f compose.local.yml up -d
+services:
+  geoserver:
+    ports:
+      - "8080:8080"
+  postgis:
+    ports:
+      - "5432:5432"
