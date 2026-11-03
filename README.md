@@ -1,5 +1,7 @@
 # GIS stack: GeoServer + PostGIS on Dokploy
 
+![GeoServer web admin welcome page](web-admin.png)
+
 ```
 git push ──► Dokploy clones repo ──► docker compose up
                                        ├─ postgis     (volume: postgis_data)
