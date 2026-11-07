@@ -45,22 +45,7 @@ services:
       EXTRA_JAVA_OPTS: >-
         -Xms${GEOSERVER_XMS:-1g} -Xmx${GEOSERVER_XMX:-2g}
         -DGEOSERVER_CSRF_WHITELIST=${GEOSERVER_DOMAIN:-localhost}
-    # The image rewrites users.xml/roles.xml from its defaults on every start
-    # while GEOSERVER_ADMIN_PASSWORD is set, which deletes users made in the
-    # UI. Apply the env credentials only on the first boot of a fresh volume;
-    # after that, change the admin password in the UI (and update the env var
-    # so the publisher can still log in).
-    entrypoint:
-      - /bin/bash
-      - -c
-      - |
-        MARKER=/opt/geoserver_data/.admin_credentials_applied
-        if [ -f "$$MARKER" ]; then
-          unset GEOSERVER_ADMIN_PASSWORD GEOSERVER_ADMIN_PASSWORD_FILE
-        else
-          mkdir -p /opt/geoserver_data && touch "$$MARKER"
-        fi
-        exec /bin/bash /opt/startup.sh
+
     volumes:
       - geoserver_data:/opt/geoserver_data
       # Source GIS files from git, read-only. Paths inside GeoServer: /data/...
