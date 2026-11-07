@@ -50,6 +50,7 @@ services:
       - geoserver_data:/opt/geoserver_data
       # Source GIS files from git, read-only. Paths inside GeoServer: /data/...
       - ./data:/data:ro
+      - ../files/bigdata:/bigdata:ro
     expose:
       - "8080"
     healthcheck:
